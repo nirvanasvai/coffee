@@ -17,6 +17,8 @@ class DeviceController extends Controller
 		return view('device.index',compact('devices'));
 	}
 	
+	
+	
 	public function innerCity($slug)
 	{
 		$city = City::query()->where('slug',$slug)->firstOrFail();
