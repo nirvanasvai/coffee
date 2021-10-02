@@ -7,14 +7,24 @@
 			'routeIs' => 'city',
 		],
 		[
-			'title' => 'Устройства',
-			'route' => 'device',
-			'routeIs' => 'device.*',
+			'title' => 'Города',
+			'route' => 'city.index',
+			'routeIs' => 'city.*',
 		],
 		[
 			'title' => 'Компании',
 			'route' => 'company.index',
 			'routeIs' => 'device.*',
+		],
+		[
+			'title' => 'Устройства',
+			'route' => 'device',
+			'routeIs' => 'device.*',
+		],
+		[
+			'title' => 'Ошибки',
+			'route' => 'error.index',
+			'routeIs' => 'error.*',
 		],
 		[
 			'title' => 'Аналитика',

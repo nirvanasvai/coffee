@@ -30,18 +30,7 @@
                 <div class="form-group">
                     <label for="">Название города</label>
                     <input type="text" class="form-control" name="name" placeholder="Название"
-                           value="@if(old('name')){{old('name')}}@else{{$city->name ?? ""}}@endif" required>
-                </div>
-                <div class="form-group">
-                    <label for="1">100%
-                        <input type="radio" class="custom-radio" name="status" value="1">
-                    </label>
-                    <label for="2">50%
-                        <input type="radio" class="custom-radio" name="status" value="2">
-                    </label>
-                    <label for="3">30%
-                        <input type="radio" class="custom-radio" name="status" value="3">
-                    </label>
+                           value="{{$city->name ?? ""}}" required>
                 </div>
             </div>
 

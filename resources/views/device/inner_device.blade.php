@@ -5,9 +5,16 @@
 @section('content')
     <div class="container">
         <div class="card">
-            <div class="card-title text-center">
-                <h3>{{$device->cityRelationship->name}} - {{$device->companyRelationship->name}} - {{$device->name}}</h3>
-            </div>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">{{$device->cityRelationship->name}}</li>
+                    <li class="breadcrumb-item">{{$device->companyRelationship->name}}</li>
+                    @isset($device->filial_name)
+                        <li class="breadcrumb-item" aria-current="page">{{$device->filial_name ?? ''}}</li>
+                    @endisset
+                    <li class="breadcrumb-item" aria-current="page">{{$device->name}}</li>
+                </ol>
+            </nav>
         </div>
        <div class="row">
            <div class="col-sm-4">

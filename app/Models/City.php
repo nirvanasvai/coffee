@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 class City extends Model
 {
     use HasFactory;
-    protected $fillable = ['name','status','slug'];
+    protected $fillable = ['name','slug'];
 	
 	
 	public static function boot()
@@ -28,6 +28,11 @@ class City extends Model
 		return $this->hasMany(Device::class,'city_id','id');
 	}
 	
+	public function companies()
+	{
+		return $this->hasMany(Company::class,'city_id','id')->with('deviceRelationship');
+	}
 	
-	
+//	public function
+
 }

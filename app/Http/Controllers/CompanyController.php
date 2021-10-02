@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\City;
 use App\Models\Company;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,8 @@ class CompanyController extends Controller
      */
     public function create()
     {
-		return view('company.create');
+    	$cities = City::query()->get();
+		return view('company.create',compact('cities'));
     }
 
     /**
@@ -36,8 +38,12 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
+    	$request->validate([
+    		'city_id'=>'required'
+		]);
         Company::query()->create([
-        	'name'=>$request->name
+        	'name'=>$request->name,
+        	'city_id'=>$request->city_id,
 		]);
         
         return  redirect('/company')->with('success','Успешно Добавлено!');
@@ -62,9 +68,10 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
+    	$cities = City::query()->get();
 		if (auth()->user()->role != 1)
 		    return back()->with('warning','У вас нет прав в данный раздел!');;
-		return view('company.edit',compact('company'));
+		return view('company.edit',compact('company','cities'));
 		
     }
 
@@ -78,6 +85,7 @@ class CompanyController extends Controller
     public function update(Request $request, Company $company)
     {
         $company->name = $request->name;
+        $company->city_id = $request->city_id;
         $company->update();
 		return  redirect('/company')->with('success','Успешно Обновлено!');
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\City;
+use App\Models\Company;
 use App\Services\City\CityService;
 use App\Services\User\UserCreateService;
 use Illuminate\Http\Request;
@@ -26,8 +27,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-    	$cities = City::query()->has('device')->get();
+    	$cities = City::query()->get();
         return view('city.home',compact('cities'));
+    }
+    public function home()
+    {
+    	$cities = City::query()->get();
+        return view('city.index',compact('cities'));
     }
 
 	public function create()
@@ -43,8 +49,9 @@ class HomeController extends Controller
 		return redirect('city')->with('success','Успешно Добавлено!');
 	}
 
-	public function edit(City $city)
+	public function edit($id)
 	{
+		$city = City::query()->find($id);
 		return view('city.edit',compact('city'));
 	}
 

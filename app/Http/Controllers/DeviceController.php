@@ -20,8 +20,12 @@ class DeviceController extends Controller
 	public function innerCity($slug)
 	{
 		$city = City::query()->where('slug',$slug)->firstOrFail();
+//		$companies = Company::query()->where('city_id',$city->id)->get();
+//		$device = Device::query()->where('company_id',$companies[0]->id)->get();
+
+//		dd($device);
 		
-		return view('device.inner',compact('city'));
+		return view('device.inner',compact('city',));
 	}
 	
 	public function innerDevice($id)

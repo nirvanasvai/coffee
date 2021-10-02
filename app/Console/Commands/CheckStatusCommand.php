@@ -48,20 +48,18 @@ class CheckStatusCommand extends Command
 			'debug' => true,
 		])->get('http://127.0.0.1:8000/api/test');
 		$objects = $response->object();
-		
 		foreach ($objects as $object)
 		{
-//			$totalAmount = $object->milk + $object->coffee + $object->water + $object->cocoa;
-//			$check = $totalAmount / 4;
-//			if ($check >= 70 ){
-//				$object->status = 1;
-//			}elseif ($check >=30){
-//				$object->status = 2;
-//			}else{
-//				$object->status = 3;
-//			}
+			if ($object->milk == 0 || $object->water == 0 || $object->cocoa == 0 || $object->coffee == 0) {
+			    $object->status =3;
+			}elseif ($object->milk<= 30 || $object->water<= 30 || $object->cocoa<= 30 || $object->coffee <= 30){
+				$object->status = 2;
+			}else {
+				$object->status = 1;
+			}
 			$deviceFindForUpdate = [
 				'name'=>$object->name,
+				'filial_name'=>$object->filial_name,
 				'company_id'=>$object->company_id,
 				'code'=>$object->code,
 				'cocoa'=>$object->cocoa,
@@ -73,19 +71,7 @@ class CheckStatusCommand extends Command
 				'user_id'=>$object->user_id,
 				'error_id'=>$object->error_id,
 			];
-			if ($object->status ==1) {
-				Downtime::query()->create([
-					'downtime'=>Carbon::now(),
-					'device_id'=>$object->id
-				]);
-			}else {
-				Downtime::query()->create([
-					'stop_downtime'=>Carbon::now(),
-					'device_id'=>$object->id
-				]);
-			}
 			Device::query()->upsert([$deviceFindForUpdate],['code'],['cocoa','coffee','water','milk','status','company_id','error_id']);
-			
 			dump('end');
 		}
 	}

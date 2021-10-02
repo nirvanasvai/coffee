@@ -5,16 +5,16 @@
     <div class="container">
 
         <br>
-        <h2>Редактирование пользователя</h2>
+        <h2>Редактирование Города</h2>
         <hr />
 
-        <form class="form-horizontal" action="{{ route('user.update', $user) }}" method="post">
+        <form class="form-horizontal" action="{{ route('city.update', $city)}}" method="post">
             @method('PUT')
             @csrf
 
 
             {{-- Form include --}}
-            @include('user..form')
+            @include('city.form')
 
         </form>
     </div>

@@ -9,6 +9,7 @@ class DeviceService
 	{
 		return Device::query()->create([
 			'name'=>$request->name,
+			'filial_name'=>$request->filial_name,
 			'company_id'=>$request->company_id,
 			'code'=>$request->code,
 			'cocoa'=>'100',
@@ -25,6 +26,7 @@ class DeviceService
 	public function getUpdateDevice($request,$device)
 	{
 		$device->name = $request->name;
+		$device->filial_name = $request->filial_name;
 		$device->company_id = $request->company_id;
 		$device->code = $request->code;
 		$device->cocoa = $request->cocoa;

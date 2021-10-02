@@ -10,4 +10,9 @@ class Company extends Model
     use HasFactory;
     
     protected $guarded;
+    
+    public function deviceRelationship()
+	{
+		return $this->hasMany(Device::class,'company_id','id');
+	}
 }

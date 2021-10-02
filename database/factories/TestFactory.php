@@ -24,12 +24,13 @@ class TestFactory extends Factory
     {
         return [
             'name'=>$this->faker->name,
-            'company_id'=>1,
+            'filial_name'=>$this->faker->name,
+            'company_id'=>rand(1,13),
 			'code'=>$this->faker->unique->postcode,
-			'milk'=>rand(1,100),
-			'coffee'=>rand(1,100),
-			'water'=>rand(1,100),
-			'cocoa'=>rand(1,100),
+			'milk'=>rand(0,100),
+			'coffee'=>rand(0,100),
+			'water'=>rand(0,100),
+			'cocoa'=>rand(0,100),
 			'city_id'=>rand(1,13),
 			'user_id'=>2,
 			'status'=>2,

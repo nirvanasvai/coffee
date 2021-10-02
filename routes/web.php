@@ -20,9 +20,15 @@ Route::get('/', function () {
 
 
 Route::middleware('auth')->group(function (){
+	Route::get('/analytic',[App\Http\Controllers\AnalyticController::class,'index'])->name('analytic');
 	Route::resource('company',App\Http\Controllers\CompanyController::class);
+	Route::resource('error',App\Http\Controllers\ErrorController::class);
 	Route::resource('user',App\Http\Controllers\UserController::class);
 	Route::get('/city', [App\Http\Controllers\HomeController::class, 'index'])->name('city');
+	Route::get('/city/{id}/edit', [App\Http\Controllers\HomeController::class, 'edit'])->name('city.edit');
+	Route::delete('/delete', [App\Http\Controllers\HomeController::class, 'destroy'])->name('city.destroy');
+	Route::post('/update', [App\Http\Controllers\HomeController::class, 'update'])->name('city.update');
+	Route::get('/city/home', [App\Http\Controllers\HomeController::class, 'home'])->name('city.index');
 	Route::post('/city', [App\Http\Controllers\HomeController::class, 'store'])->name('city.store');
 	Route::get('/device',[App\Http\Controllers\DeviceController::class,'index'])->name('device');
 	Route::get('/device/create',[App\Http\Controllers\DeviceController::class,'create'])->name('device.create');

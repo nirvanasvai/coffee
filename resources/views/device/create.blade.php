@@ -7,15 +7,21 @@
                 @csrf
                 <div class="card-body">
                     <div class="form-group">
+                        <label for="">Город</label>
                         <select class="custom-select" name="city_id" required>
                             @foreach($cities as $item)
                                 <option value="{{$item->id}}">{{$item->name}}</option>
                             @endforeach
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label for="">Филиал</label>
+                        <input type="text" class="form-control" name="filial_name" required>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="form-group">
+                         <label for="">Устройства</label>
                        <select name="name" class="custom-select form-control" required>
                            <option value="WMF 1500S">WMF 1500S</option>
                            <option value="WMF 1500S+">WMF 1500S+</option>
@@ -27,13 +33,7 @@
                        </select>
                     </div>
                     <div class="form-group">
-                        <select name="error_id" class="custom-select form-control" required>
-                            @foreach ($errorLists as $item)
-                                <option value="{{$item->id}}">{{$item->code}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
+                        <label for="">Компании</label>
                         <select name="company_id" class="custom-select form-control" required>
                             @foreach ($company as $item)
                                 <option value="{{$item->id}}">{{$item->name}}</option>

@@ -18,21 +18,16 @@
                 </div>
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="">Ошибки</label>
-                        <select name="error_id" class="custom-select form-control" required>
-                            @foreach ($errorLists as $item)
-                                <option value="{{$item->id}}"
-                                        @if(isset($select) && $item->id == $select) selected @endif>{{$item->code}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
                         <label for="">Компании</label>
                         <select name="company_id" class="custom-select form-control" required>
                             @foreach ($company as $item)
                                 <option value="{{$item->id}}"  @if(isset($select) && $item->id == $select) selected @endif>{{$item->name}}</option>
                             @endforeach
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Филиал</label>
+                        <input type="text" class="form-control" name="filial_name" value="{{$device->filial_name}}" required>
                     </div>
                     <div class="form-group">
                         <label for="">Код</label>

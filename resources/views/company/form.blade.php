@@ -32,7 +32,15 @@
                     <input type="text" class="form-control" name="name" placeholder="Имя"
                            value="@if(old('name')){{old('name')}}@else{{$company->name ?? ""}}@endif" required>
                 </div>
-
+                <div class="form-group">
+                    <label for="">Город</label>
+                    <select class="custom-select" name="city_id" required>
+                        @foreach($cities as $item)
+                            <option value="{{$item->id}}"
+                                    @if(isset($select) && $item->id == $select) selected @endif >{{$item->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
 
         </div>
