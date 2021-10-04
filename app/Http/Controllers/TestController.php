@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Test;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class TestController extends Controller
 {
@@ -13,4 +14,5 @@ class TestController extends Controller
 		
 		return json_encode($test);
 	}
+	
 }

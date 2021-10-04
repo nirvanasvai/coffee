@@ -24,7 +24,7 @@ class Kernel extends ConsoleKernel
      */
 	protected function schedule(Schedule $schedule)
 	{
-		$schedule->command('check-status')->everyFiveMinutes()->withoutOverlapping();
+		$schedule->command('check-status')->everyMinute();
 	}
     /**
      * Register the commands for the application.

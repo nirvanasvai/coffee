@@ -21,6 +21,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @livewireStyles
 </head>
 <body>
     <div id="app">
@@ -29,17 +30,17 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     Coffee
                 </a>
-                <ul class="navbar-nav mr-auto">
-                    @if (auth()->check())
-                        @if (auth()->user()->role==1)
-                            <li class="nav-link">
-                                <a class="btn-link text-dark" href="{{route('user.index')}}">Пользователи</a>
-                            </li>
-                        @endif
-                    @endif
-                </ul>
 
             </div>
+            <ul class="navbar-nav mr-auto">
+                @if (auth()->check())
+                    @if (auth()->user()->role==1)
+                        <li class="nav-link">
+                            <a class="btn-link text-dark" href="{{route('user.index')}}">Пользователи</a>
+                        </li>
+                    @endif
+                @endif
+            </ul>
         </nav>
        <x-menu/>
 
@@ -50,6 +51,6 @@
             @yield('content')
         </main>
     </div>
-
+    @livewireScripts
 </body>
 </html>

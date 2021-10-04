@@ -5,15 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\City;
 use App\Models\Company;
 use App\Models\Device;
+use App\Models\Downtime;
 use App\Models\ErrorList;
 use App\Services\Device\DeviceService;
+use Astatroth\LaravelTimer\Timer;
+use DateTime;
 use Illuminate\Http\Request;
 
 class DeviceController extends Controller
 {
     public function index()
 	{
-		$devices = Device::query()->get();
+		$devices = Device::query()->paginate(8);
 		return view('device.index',compact('devices'));
 	}
 	
@@ -33,8 +36,10 @@ class DeviceController extends Controller
 	public function innerDevice($id)
 	{
 		$device = Device::query()->where('id',$id)->firstOrFail();
+		$downtimes = Downtime::query()->orderBy('id','desc')->where('device_id' , $device->id)->first();
 		
-		return view('device.inner_device',compact('device'));
+		
+		return view('device.inner_device',compact('device','downtimes'));
 	}
 	public function create()
 	{
@@ -67,5 +72,14 @@ class DeviceController extends Controller
 		$deviceService->getUpdateDevice($request,$device);
 		
 		return redirect('device')->with('success','Успешно Обновлено!');
+	}
+	
+	public function destroy($id)
+	{
+		$device = Device::query()->find($id);
+		
+		$device->delete();
+		
+		return back()->with('success','Успешно Удалено!');
 	}
 }

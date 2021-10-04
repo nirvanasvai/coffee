@@ -25,6 +25,8 @@ class CheckStatusCommand extends Command
      * @var string
      */
     protected $description = 'Command description';
+    
+    
 
     /**
      * Create a new command instance.
@@ -43,36 +45,25 @@ class CheckStatusCommand extends Command
      */
 	public function handle()
 	{
-		dump('start');
-		$response = Http::withOptions([
-			'debug' => true,
-		])->get('http://127.0.0.1:8000/api/test');
+		$response = Http::get('http://127.0.0.1:8000/api/test');
 		$objects = $response->object();
-		foreach ($objects as $object)
-		{
-			if ($object->milk == 0 || $object->water == 0 || $object->cocoa == 0 || $object->coffee == 0) {
-			    $object->status =3;
-			}elseif ($object->milk<= 30 || $object->water<= 30 || $object->cocoa<= 30 || $object->coffee <= 30){
-				$object->status = 2;
-			}else {
-				$object->status = 1;
-			}
-			$deviceFindForUpdate = [
-				'name'=>$object->name,
-				'filial_name'=>$object->filial_name,
-				'company_id'=>$object->company_id,
-				'code'=>$object->code,
-				'cocoa'=>$object->cocoa,
-				'coffee'=>$object->coffee,
-				'water'=>$object->water,
-				'milk'=>$object->milk,
-				'status'=>$object->status,
-				'city_id'=>$object->city_id,
-				'user_id'=>$object->user_id,
-				'error_id'=>$object->error_id,
-			];
-			Device::query()->upsert([$deviceFindForUpdate],['code'],['cocoa','coffee','water','milk','status','company_id','error_id']);
-			dump('end');
+		
+		foreach ($objects as $object) {
+			
+			$a = Device::query()->where('code', $object->code)->first();
+			$a->name = $object->name;
+			$a->filial_name = $object->filial_name;
+			$a->company_id = $object->company_id;
+			$a->code = $object->code;
+			$a->cocoa = $object->cocoa;
+			$a->coffee = $object->coffee;
+			$a->water = $object->water;
+			$a->milk = $object->milk;
+			$a->city_id = $object->city_id;
+			$a->user_id = $object->user_id;
+			$a->error_id = $object->error_id;
+			
+			$a->update();
 		}
 	}
  

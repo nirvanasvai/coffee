@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function (){
 	Route::post('/city', [App\Http\Controllers\HomeController::class, 'store'])->name('city.store');
 	Route::get('/device',[App\Http\Controllers\DeviceController::class,'index'])->name('device');
 	Route::get('/device/create',[App\Http\Controllers\DeviceController::class,'create'])->name('device.create');
+	Route::delete('/device/{id}/destroy',[App\Http\Controllers\DeviceController::class,'destroy'])->name('device.destroy');
 	Route::get('/device/{id}/edit',[App\Http\Controllers\DeviceController::class,'edit'])->name('device.edit');
 	Route::post('/device/create',[App\Http\Controllers\DeviceController::class,'store'])->name('device.store');
 	Route::post('/device/update',[App\Http\Controllers\DeviceController::class,'update'])->name('device.update');

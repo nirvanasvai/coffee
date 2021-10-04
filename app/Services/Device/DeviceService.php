@@ -16,7 +16,7 @@ class DeviceService
 			'coffee'=>'100',
 			'water'=>'100',
 			'milk'=>'100',
-			'status'=>1,
+			'status'=>10,
 			'city_id'=>$request->city_id,
 			'error_id'=>$request->error_id,
 			'user_id'=>auth()->user()->id

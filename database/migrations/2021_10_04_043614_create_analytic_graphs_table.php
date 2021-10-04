@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDowntimesTable extends Migration
+class CreateAnalyticGraphsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateDowntimesTable extends Migration
      */
     public function up()
     {
-        Schema::create('downtimes', function (Blueprint $table) {
+        Schema::create('analytic_graphs', function (Blueprint $table) {
             $table->id();
-            $table->timestamp('downtime')->nullable();
-            $table->timestamp('stop_downtime')->nullable();
             $table->integer('device_id');
-            $table->integer('status');
+            $table->integer('status_1');
+            $table->integer('status_2');
+            $table->integer('status_3');
+            $table->timestamp('date');
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class CreateDowntimesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('downtimes');
+        Schema::dropIfExists('analytic_graphs');
     }
 }
