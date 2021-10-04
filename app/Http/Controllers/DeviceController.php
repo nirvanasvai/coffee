@@ -93,6 +93,6 @@ class DeviceController extends Controller
 		
 		$device->delete();
 		
-		return back()->with('success','Успешно Удалено!');
+		return redirect('/device')->with('success','Успешно Удалено!');
 	}
 }

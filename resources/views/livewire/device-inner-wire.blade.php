@@ -47,8 +47,25 @@
                 @else
                     <li class="list-group-item pt-4">Нет</li>
                 @endif
+                <li class="list-group-item">
+                    <a href="{{route('device.edit',$device)}}" class="float-left">
+                        <button class="btn btn-info text-white">
+                            Изменить
+                        </button>
+                    </a>
+                    <form onsubmit="if(confirm('Удалить?')){ return true }else{ return false }" action="{{ route('device.destroy', $device) }}" method="post">
+                        @method('DELETE')
+                        @csrf
+                    <a href="{{route('device.edit',$device)}}" class="float-right">
+                        <button class="btn btn-danger">
+                            Удалить
+                        </button>
+                    </a>
+                    </form>
+                </li>
             </ul>
-            <a href="{{route('device.edit',$device)}}"> <button class="btn btn-primary">Изменить</button></a>
+
+
         </div>
             <div class="col-sm-4">
                 <ul class="list-group">
@@ -61,7 +78,7 @@
                             @endisset</span> мин
                     </li>
                     <li class="list-group-item">
-                        время работы
+                        Время работы
                         <span class="text-danger">@isset($downtimes->status )
                                 @if ($downtimes->status ==1 || $downtimes->status ==2)
                                     {{$device->hour_diff($downtimes->downtime , $downtimes->stop_downtime)}}:{{date('s')}}
