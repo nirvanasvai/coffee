@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="card">
-            <form action="{{route('device.update',$device)}}" method="post" class="list-group-horizontal">
+            <form action="{{route('device.update',$device->id)}}" method="post" class="list-group-horizontal">
                 @csrf
                 <div class="card-body">
                     <div class="form-group">

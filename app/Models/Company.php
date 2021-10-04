@@ -13,6 +13,10 @@ class Company extends Model
     
     public function deviceRelationship()
 	{
-		return $this->hasMany(Device::class,'company_id','id');
+		return $this->hasOne(Device::class,'company_id','id');
+	}
+	public function cityCompany()
+	{
+		return $this->hasOne(City::class,'id','city_id');
 	}
 }

@@ -10,12 +10,14 @@
         <table class="table table-striped table-borderless">
             <thead class="thead-dark">
             <th>Название</th>
+            <th>Город</th>
             <th class="text-right">Действие</th>
             </thead>
             <tbody>
             @forelse ($companies as $company)
                 <tr>
                     <td>{{ $company->name }}</td>
+                    <td>{{ $company->cityCompany->name }}</td>
                     <td class="text-right">
                         <form onsubmit="if(confirm('Удалить?')){ return true }else{ return false }" action="{{ route('company.destroy', $company) }}" method="post">
                             @method('DELETE')

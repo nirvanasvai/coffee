@@ -1,7 +1,7 @@
 @if ($item->status==1)
-    bg-success
+    badge badge-success
 @elseif ($item->status ==2)
-    bg-warning
+    badge badge-warning
 @else
-    bg-danger
+    badge badge-danger
 @endif

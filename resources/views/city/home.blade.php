@@ -3,25 +3,15 @@
 @section('content')
 <div class="container">
     <div class="row">
-        @foreach ($cities as $item)
-            <div class="col-sm-3 pt-2">
-                <div class="card bg-white text-center">
-                    <a class="nav-link text-dark" href="{{route('device.inner.city',$item->slug)}}">
-                        <h3 class="card-title">{{$item->name}}</h3> </a>
+        @foreach ($devices as $item)
+            <div class="mr-2 pt-2">
+                <div class="text-center text-dark @include('components.status',['item'=>$item])">
+                    <a class="nav-link text-dark" href="{{route('device.inner.city',$item->cityRelationship->slug)}}">
+                        <h4 class="">{{$item->cityRelationship->name}}</h4><p>{{$item->companyRelationship->name}}</p>
+                        <p>{{$item->filial_name}}</p>
+                        <p>{{$item->name}}</p> </a>
+
                 </div>
-{{--                <div class="">--}}
-{{--                    @foreach ($item->device as $val)--}}
-{{--                        <div class="card  @if ($val->status==1)--}}
-{{--                                bg-success--}}
-{{--@elseif ($val->status ==2)--}}
-{{--                                bg-warning--}}
-{{--@else--}}
-{{--                                bg-danger--}}
-{{--@endif">--}}
-{{--                            <h4 class="pt-4">{{$val->name}}</h4>--}}
-{{--                        </div>--}}
-{{--                    @endforeach--}}
-{{--                </div>--}}
             </div>
         @endforeach
     </div>

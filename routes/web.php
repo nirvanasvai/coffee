@@ -26,8 +26,8 @@ Route::middleware('auth')->group(function (){
 	Route::resource('user',App\Http\Controllers\UserController::class);
 	Route::get('/city', [App\Http\Controllers\HomeController::class, 'index'])->name('city');
 	Route::get('/city/{id}/edit', [App\Http\Controllers\HomeController::class, 'edit'])->name('city.edit');
-	Route::delete('/delete', [App\Http\Controllers\HomeController::class, 'destroy'])->name('city.destroy');
-	Route::post('/update', [App\Http\Controllers\HomeController::class, 'update'])->name('city.update');
+	Route::delete('/delete/{id}', [App\Http\Controllers\HomeController::class, 'destroy'])->name('city.destroy');
+	Route::put('/update/{id}', [App\Http\Controllers\HomeController::class, 'update'])->name('city.update');
 	Route::get('/city/home', [App\Http\Controllers\HomeController::class, 'home'])->name('city.index');
 	Route::post('/city', [App\Http\Controllers\HomeController::class, 'store'])->name('city.store');
 	Route::get('/device',[App\Http\Controllers\DeviceController::class,'index'])->name('device');
@@ -35,7 +35,7 @@ Route::middleware('auth')->group(function (){
 	Route::delete('/device/{id}/destroy',[App\Http\Controllers\DeviceController::class,'destroy'])->name('device.destroy');
 	Route::get('/device/{id}/edit',[App\Http\Controllers\DeviceController::class,'edit'])->name('device.edit');
 	Route::post('/device/create',[App\Http\Controllers\DeviceController::class,'store'])->name('device.store');
-	Route::post('/device/update',[App\Http\Controllers\DeviceController::class,'update'])->name('device.update');
+	Route::post('/device/update/{id}',[App\Http\Controllers\DeviceController::class,'update'])->name('device.update');
 	Route::get('/city/create',[App\Http\Controllers\HomeController::class,'create'])->name('city.create');
 	Route::get('/device/{slug}',[App\Http\Controllers\DeviceController::class,'innerCity'])->name('device.inner.city');
 	Route::get('/device/find/{id}',[App\Http\Controllers\DeviceController::class,'innerDevice'])->name('device.inner');

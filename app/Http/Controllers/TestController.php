@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\TestApi;
 use App\Models\Test;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -12,7 +13,7 @@ class TestController extends Controller
 	{
 		$test = Test::query()->get();
 		
-		return json_encode($test);
+		return response([ 'test' => TestApi::collection($test)]);
 	}
 	
 }

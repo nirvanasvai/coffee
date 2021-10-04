@@ -16,8 +16,9 @@ class DeviceController extends Controller
 {
     public function index()
 	{
-		$devices = Device::query()->paginate(8);
-		return view('device.index',compact('devices'));
+		$cities = City::query()->has('deviceRelationship')->with('deviceRelationship')->get();
+		
+		return view('device.index',compact('cities'));
 	}
 	
 	
@@ -44,11 +45,10 @@ class DeviceController extends Controller
 	public function create()
 	{
 		$cities = City::query()->get();
-		$errorLists = ErrorList::query()->get();
 		$company = Company::query()->get();
 		if (auth()->user()->role !=1)
 			return redirect('device')->with('warning','У вас нет прав в данный раздел!');
-			return view('device.create',compact('cities','errorLists','company'));
+			return view('device.create',compact('cities','company'));
 		
 	}
 	
@@ -67,9 +67,22 @@ class DeviceController extends Controller
 		$company = Company::query()->get();
 		return view('device.edit',compact('device','cities','company','errorLists'));
 	}
-	public function update(Request $request,DeviceService $deviceService,Device $device)
+	public function update(Request $request,$id)
 	{
-		$deviceService->getUpdateDevice($request,$device);
+		$device = Device::query()->findOrFail($id);
+//		$device->name = $request->name;
+		$device->filial_name = $request->filial_name;
+		$device->company_id = $request->company_id;
+		$device->code = $request->code;
+//		$device->cocoa = $request->cocoa;
+//		$device->coffee = $request->coffee;
+//		$device->water = $request->water;
+//		$device->milk = $request->milk;
+		$device->status = $request->status;
+		$device->city_id = $request->city_id;
+//		$device->error_id = $request->error_id;
+		$device->user_id = auth()->user()->id;
+		$device->update();
 		
 		return redirect('device')->with('success','Успешно Обновлено!');
 	}

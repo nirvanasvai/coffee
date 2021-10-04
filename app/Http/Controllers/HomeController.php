@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\City;
 use App\Models\Company;
+use App\Models\Device;
 use App\Services\City\CityService;
 use App\Services\User\UserCreateService;
 use Illuminate\Http\Request;
@@ -27,8 +28,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-    	$cities = City::query()->get();
-        return view('city.home',compact('cities'));
+    	$devices = Device::query()->get();
+        return view('city.home',compact('devices'));
     }
     public function home()
     {
@@ -55,15 +56,20 @@ class HomeController extends Controller
 		return view('city.edit',compact('city'));
 	}
 
-	public function update(Request $request,City $city,CityService $service)
+	public function update(Request $request,$id)
 	{
-		$service->getUpdateCity($request,$city);
+		$city = City::query()->findOrFail($id);
+		$city->name = $request->name;
+		
+		$city->update();
 
-		return redirect('city')->with('success','Успешно Обновлено!');
+		return redirect('city/home')->with('success','Успешно Обновлено!');
 	}
 
-	public function destroy(City $city)
+	public function destroy($id)
 	{
+		$city = City::query()->findOrFail($id);
+		
 		$city->delete();
 		return back()->with('success','Успешно Удалено!');
 	}

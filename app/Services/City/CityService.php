@@ -17,9 +17,6 @@ class CityService
 	public function getUpdateCity($request,$city)
 	{
 		$city->name = $request['name'];
-		if (isset($city->slug)) {
-		    $city->slug = $request['slug'];
-		}
 		$city->save();
 		
 		return $city;

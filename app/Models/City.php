@@ -27,6 +27,10 @@ class City extends Model
 	{
 		return $this->hasMany(Device::class,'city_id','id');
 	}
+	public function deviceRelationship()
+	{
+		return $this->hasOne(Device::class,'city_id','id');
+	}
 	
 	public function companies()
 	{

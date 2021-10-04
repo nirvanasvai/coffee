@@ -8,7 +8,7 @@
         <h2>Редактирование Города</h2>
         <hr />
 
-        <form class="form-horizontal" action="{{ route('city.update', $city)}}" method="post">
+        <form class="form-horizontal" action="{{ route('city.update', $city->id)}}" method="post">
             @method('PUT')
             @csrf
 
